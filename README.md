@@ -1,6 +1,6 @@
 # Statistical & Practical Aspects of Multi‑Arm Multi‑Stage Platform Trials
 
-This repository contains a self‑contained tutorial on the **design and analysis of Multi‑Arm Multi‑Stage (MAMS) platform trials**, with emphasis on the **practical implementation in real studies** (e.g., STAMPEDE, I‑SPY 2, REMAP‑CAP, TAILoR).
+This repository contains a self‑contained introduction on the **design and analysis of Multi‑Arm Multi‑Stage (MAMS) platform trials**, with emphasis on the **practical implementation in real studies** (e.g., STAMPEDE, I‑SPY 2, REMAP‑CAP, TAILoR).
 
 ## What this tutorial covers
 
