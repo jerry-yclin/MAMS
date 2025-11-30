@@ -79,5 +79,5 @@ We then define the **information fraction**:
 
 $$t_j = \frac{I_j}{I_J},\qquad j=1,\dots,J,\quad t_J = 1$$
 
-The pair $(I_J, t_1,\dots,t_{J-1})$ is often easier to specify than calendar times and sample sizes: the calendar timeline is derived after you know how many patients and events you need.
+The pair $(I_J, t_1,\dots,t_{J-1})$ is often easier to specify than calendar times and sample sizes: the calendar timeline is derived after you know how many patients and stages you need.
 
