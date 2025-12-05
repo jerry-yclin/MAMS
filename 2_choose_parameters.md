@@ -81,3 +81,89 @@ $$t_j = \frac{I_j}{I_J},\qquad j=1,\dots,J,\quad t_J = 1$$
 
 The pair $(I_J, t_1,\dots,t_{J-1})$ is often easier to specify than calendar times and sample sizes: the calendar timeline is derived after you know how many patients and stages you need.
 
+## 2.2 Correlation structure across arms and stages
+
+The key technical ingredient in MAMS design is the **joint correlation structure** of all the $Z$‑statistics.
+
+Let
+
+$$ \mathbf{Z} = (Z_{11},\dots,Z_{K1}, Z_{12},\dots,Z_{K2}, \dots, Z_{1J},\dots,Z_{KJ})^\top $$
+
+Under the true effects $\theta = (\theta_1,\dots,\theta_K)$, we have
+
+$$ \mathbf{Z} \sim N_{KJ}(\boldsymbol{\mu}(\theta), \Sigma) $$
+
+for some mean vector $\boldsymbol{\mu}(\theta)$ and covariance matrix $\Sigma$.
+
+The mean vector is simple:
+
+$$\mu_{kj}(\theta) = \theta_k \sqrt{I_j}$$
+
+The interesting bit is $\Sigma$, which captures:
+
+1. **Correlation across stages** for the *same arm* (repeated looks at the same data).
+2. **Correlation across arms** at the *same stage* (shared control group).
+
+### 2.2.1 Same arm, different stages
+
+Fix $k$. The sequence $(Z_{k1},\dots,Z_{kJ})$ has a multivariate normal distribution with
+
+$$\text{Corr}(Z_{kj}, Z_{k\ell}) = \sqrt{\frac{I_j}{I_\ell}} = \sqrt{\frac{t_j}{t_\ell}}, \qquad j \le \ell $$
+
+Intuition:
+
+* You can think of an underlying **Brownian motion** $B_k(t)$ with variance parameter $t$.
+* At analysis $j$, the statistic can be expressed (under $H_{0k}$) as
+
+$$Z_{kj} = \frac{B_k(t_j)}{\sqrt{t_j}}$$
+
+  so $\text{Cov}(Z_{kj}, Z_{k\ell}) = \sqrt{t_j/t_\ell})$ when $j \le \ell$.
+
+
+### 2.2.2 Different arms, same stage
+
+Now fix an analysis $j$ and consider two arms $k \neq k'$.
+
+Assume at stage $j$:
+
+* $N_{kj} = N_{k'j} = n_j$ on each treatment arm.
+* $N_{0j} = n_{0j}$ on the control/placebo arm.
+* All arms share the same phenotypic variance $\sigma^2$.
+
+We have
+
+$$\widehat{\theta}_{kj} = \frac{\bar{Y}_{kj} - \bar{Y}_{0j}}{\sigma}, \widehat{\theta}_{k'j} = \frac{\bar{Y}_{k'j} - \bar{Y}_{0j}}{\sigma}$$
+
+The covariance between these two estimators arises entirely from the shared control mean $\bar{Y}_{0j}$:
+
+$$\text{Cov}(\widehat{\theta}_{kj}, \widehat{\theta}_{k'j}) = \frac{1}{\sigma^2} \text{Var}(\bar{Y}_{0j}) = \frac{1}{\sigma^2} \cdot \frac{\sigma^2}{n_{0j}} = \frac{1}{n_{0j}}$$
+
+Moreover, the variance of each term is
+
+$$\text{Var}(\widehat{\theta}_{kj}) = \frac{1}{n_j} + \frac{1}{n_{0j}}$$
+
+and similarly for $k'$. So the correlation is
+
+$$\text{Corr}(\widehat{\theta}_{kj}, \widehat{\theta}_{k'j}) = \frac{1/n_{0j}}{1/n_j + 1/n_{0j}} = \frac{n_j}{n_j + n_{0j}}$$
+
+The $Z$‑statistics are just scaled versions of these, so the correlation between $Z_{kj}$ and $Z_{k'j}$ is the same:
+
+$$\text{Corr}(Z_{kj}, Z_{k'j}) = \frac{n_j}{n_j + n_{0j}}$$
+
+It is often helpful to express this in terms of a **randomization ratio**.
+
+Suppose at stage $j$ we randomize using the ratio
+
+$$ \text{control} : \text{each arm} = r_0 : r$$
+
+Then $n_{0j} : n_j = r_0 : r$ and
+
+$$\text{Corr}(Z_{kj}, Z_{k'j})= \frac{r}{r_0 + r}, \qquad k \ne k'$$
+
+Examples:
+
+* 1:1:1:1 allocation $(r_0 = r)$ ⇒ correlation $= \tfrac12$.
+* 2:1 in favour of control $(r_0 = 2r)$ ⇒ correlation $= \tfrac13$.
+
+The more **heavily** we allocate to control, the *less* correlated the arms are at each look, because the control mean is more precisely estimated.
+
