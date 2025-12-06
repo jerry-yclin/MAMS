@@ -117,7 +117,7 @@ Intuition:
 
 $$Z_{kj} = \frac{B_k(t_j)}{\sqrt{t_j}}$$
 
-  so $\text{Cov}(Z_{kj}, Z_{k\ell}) = \sqrt{t_j/t_\ell})$ when $j \le \ell$.
+  so $\text{Corr}(Z_{kj}, Z_{k\ell}) = \sqrt{t_j/t_\ell}$ when $j \le \ell$.
 
 
 ### 2.2.2 Different arms, same stage
